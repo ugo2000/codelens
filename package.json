@@ -1,0 +1,39 @@
+{
+  "name": "codelens",
+  "version": "1.0.0",
+  "description": "AI-powered codebase intelligence tool — auto-generate comprehensive docs, architecture diagrams, and insights for any project.",
+  "main": "src/cli/index.js",
+  "bin": {
+    "codelens": "./src/cli/index.js"
+  },
+  "scripts": {
+    "start": "node src/cli/index.js",
+    "analyze": "node src/cli/index.js analyze",
+    "serve": "node src/cli/index.js serve",
+    "test": "node --experimental-vm-modules src/cli/index.js analyze ."
+  },
+  "keywords": [
+    "documentation",
+    "code-analysis",
+    "ai",
+    "developer-tools",
+    "open-source"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/user/codelens"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/user"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "chalk": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

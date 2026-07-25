@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeLens — AI Codebase Intelligence</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">🔍 CodeLens</div>
+      <span class="badge-version">v1.0</span>
+    </div>
+    <div class="header-center">
+      <span id="projectTitle" class="project-name"></span>
+    </div>
+    <div class="header-right">
+      <a href="https://github.com/user/codelens" target="_blank" class="header-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+      <button class="btn btn-support" id="supportBtn" onclick="showSupport()">
+        ❤️ Sponsor
+      </button>
+    </div>
+  </header>
+
+  <div class="main-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="nav">
+        <a class="nav-item active" onclick="switchTab('overview')">
+          <span class="nav-icon">📊</span> Overview
+        </a>
+        <a class="nav-item" onclick="switchTab('languages')">
+          <span class="nav-icon">🔤</span> Languages
+        </a>
+        <a class="nav-item" onclick="switchTab('modules')">
+          <span class="nav-icon">🏗️</span> Architecture
+        </a>
+        <a class="nav-item" onclick="switchTab('declarations')">
+          <span class="nav-icon">🔑</span> Definitions
+        </a>
+        <a class="nav-item" onclick="switchTab('files')">
+          <span class="nav-icon">📁</span> File Tree
+        </a>
+        <a class="nav-item" onclick="switchTab('deps')">
+          <span class="nav-icon">📦</span> Dependencies
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="scan-info">
+          <div class="scan-dot"></div>
+          <span id="scanTimeDisplay">Scan data ready</span>
+        </div>
+        <div class="export-buttons">
+          <button class="btn btn-sm" onclick="exportDocs()">📄 Export MD</button>
+          <button class="btn btn-sm" onclick="exportJSON()">📋 Export JSON</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- Tab: Overview -->
+      <section id="tab-overview" class="tab active">
+        <div class="hero">
+          <h1><span id="heroProject"></span></h1>
+          <div class="hero-meta">
+            <span class="meta-item">📁 <span id="metaFiles"></span> files</span>
+            <span class="meta-item">📝 <span id="metaLines"></span> lines</span>
+            <span class="meta-item">🏷️ <span id="metaType"></span></span>
+            <span class="meta-item">🔤 <span id="metaLang"></span></span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="statFiles">—</div>
+            <div class="stat-label">Total Files</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="statLines">—</div>
+            <div class="stat-label">Lines of Code</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="statFunctions">—</div>
+            <div class="stat-label">Functions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="statClasses">—</div>
+            <div class="stat-label">Classes</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>📊 Language Distribution</h2>
+          </div>
+          <div class="lang-bars" id="langBars"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>🏗️ Architecture Diagram</h2>
+          </div>
+          <div class="mermaid-wrapper" id="mermaidContainer">
+            <div class="mermaid" id="archMermaid"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab: Languages -->
+      <section id="tab-languages" class="tab">
+        <h1>🔤 Language Breakdown</h1>
+        <p class="subtitle">Complete language distribution across your codebase</p>
+        <div id="langDetailed" class="lang-detailed"></div>
+      </section>
+
+      <!-- Tab: Architecture -->
+      <section id="tab-modules" class="tab">
+        <h1>🏗️ Module Architecture</h1>
+        <p class="subtitle">Directory-level module breakdown</p>
+        <div id="modulesList"></div>
+        <div class="card" style="margin-top:20px;">
+          <h2>Architecture Diagram</h2>
+          <div class="mermaid" id="archMermaid2"></div>
+        </div>
+      </section>
+
+      <!-- Tab: Declarations -->
+      <section id="tab-declarations" class="tab">
+        <h1>🔑 Key Definitions</h1>
+        <p class="subtitle">Functions, classes, and other declarations found in the codebase</p>
+        <div id="declarationsList"></div>
+      </section>
+
+      <!-- Tab: File Tree -->
+      <section id="tab-files" class="tab">
+        <h1>📁 File Tree</h1>
+        <p class="subtitle">Complete directory structure with file sizes</p>
+        <pre class="file-tree" id="fileTreeContent"></pre>
+      </section>
+
+      <!-- Tab: Dependencies -->
+      <section id="tab-deps" class="tab">
+        <h1>📦 Dependencies</h1>
+        <p class="subtitle">Third-party packages used in this project</p>
+        <div id="depsContent"></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- Support Modal -->
+<div id="supportModal" class="modal-overlay" onclick="if(event.target===this)hideSupport()">
+  <div class="modal">
+    <button class="modal-close" onclick="hideSupport()">✕</button>
+    <div class="modal-body">
+      <div class="modal-icon">❤️</div>
+      <h2>Support CodeLens</h2>
+      <p>If CodeLens has helped you, consider supporting its development.</p>
+      <div class="support-options">
+        <a href="https://github.com/sponsors/user" target="_blank" class="support-btn github">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub Sponsors
+        </a>
+        <a href="https://ko-fi.com/user" target="_blank" class="support-btn kofi">
+          <span>☕</span>
+          Buy me a Coffee
+        </a>
+        <a href="https://www.paypal.com/paypalme/user" target="_blank" class="support-btn paypal">
+          <span>💳</span>
+          PayPal
+        </a>
+      </div>
+      <p class="modal-note">Open source is powered by community support. Every contribution helps!</p>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
