@@ -174,8 +174,8 @@ If CodeLens helps you or your team, please consider supporting its development:
 <div align="center">
 
 [![GitHub Sponsors](https://img.shields.io/badge/GitHub-Sponsors-EA4AAA?style=for-the-badge&logo=github)](https://github.com/sponsors/user)
-[![ko-fi](https://img.shields.io/badge/ko--fi-Buy_Me_Coffee-FF5E5B?style=for-the-badge&logo=ko-fi)](https://ko-fi.com/user)
-[![PayPal](https://img.shields.io/badge/PayPal-Donate-00457C?style=for-the-badge&logo=paypal)](https://paypal.me/user)
+[![ko-fi](https://img.shields.io/badge/ko--fi-Buy_Me_Coffee-FF5E5B?style=for-the-badge&logo=ko-fi)](https://ko-fi.com/ugo2000)
+[![PayPal](https://img.shields.io/badge/PayPal-Donate-00457C?style=for-the-badge&logo=paypal)](https://www.paypal.com/donate?business=ugotech%40126.com&currency_code=USD)
 
 </div>
 
