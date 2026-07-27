@@ -1,0 +1,206 @@
+{
+  "projectName": "codelens",
+  "projectType": "Web Backend",
+  "primaryLanguage": "Markdown",
+  "totalFiles": 16,
+  "totalLines": 2950,
+  "scanTimeMs": 15,
+  "scannedAt": "2026-07-27T13:44:26.635Z",
+  "languages": [
+    {
+      "name": "Markdown",
+      "count": 3,
+      "percentage": 19
+    },
+    {
+      "name": "JavaScript",
+      "count": 2,
+      "percentage": 13
+    },
+    {
+      "name": "JSON",
+      "count": 1,
+      "percentage": 6
+    },
+    {
+      "name": "YAML",
+      "count": 1,
+      "percentage": 6
+    },
+    {
+      "name": "HTML",
+      "count": 1,
+      "percentage": 6
+    },
+    {
+      "name": "CSS",
+      "count": 1,
+      "percentage": 6
+    }
+  ],
+  "modules": [
+    {
+      "name": ".codelens",
+      "files": 3,
+      "lines": 370
+    },
+    {
+      "name": ".github",
+      "files": 1,
+      "lines": 4
+    },
+    {
+      "name": "src",
+      "files": 8,
+      "lines": 2240
+    }
+  ],
+  "complexity": {
+    "totalDeclarations": 33,
+    "functions": 31,
+    "classes": 2,
+    "avgFileSize": 84,
+    "commentRatio": "—"
+  },
+  "architectureDiagram": "flowchart TB\n  root[codelens]\n  style root fill:#7c5cfc,stroke:#333,stroke-width:3px,color:#fff,padding:10px\n  mod0[.codelens\\n3 files, 370 lines]\n  root --> mod0\n  style mod0 fill:#1a1a24,stroke:#7c5cfc,color:#e4e4f0\n  mod1[.github\\n1 files, 4 lines]\n  root --> mod1\n  style mod1 fill:#1a1a24,stroke:#7c5cfc,color:#e4e4f0\n  mod2[src\\n8 files, 2240 lines]\n  root --> mod2\n  style mod2 fill:#1a1a24,stroke:#7c5cfc,color:#e4e4f0\n  lang0[Markdown: 3 files]\n  root -.-> lang0\n  style lang0 fill:#24243a,stroke:#34d399,color:#e4e4f0\n  lang1[JavaScript: 2 files]\n  style lang1 fill:#24243a,stroke:#34d399,color:#e4e4f0\n  lang2[JSON: 1 files]\n  style lang2 fill:#24243a,stroke:#34d399,color:#e4e4f0\n  lang3[YAML: 1 files]\n  style lang3 fill:#24243a,stroke:#34d399,color:#e4e4f0\n  lang4[HTML: 1 files]\n  style lang4 fill:#24243a,stroke:#34d399,color:#e4e4f0",
+  "topDeclarations": [
+    {
+      "type": "class",
+      "name": "ApiClient",
+      "line": 124,
+      "file": "README.md"
+    },
+    {
+      "type": "function",
+      "name": "printBanner",
+      "line": 20,
+      "file": "src/cli/index.js"
+    },
+    {
+      "type": "function",
+      "name": "printHelp",
+      "line": 29,
+      "file": "src/cli/index.js"
+    },
+    {
+      "type": "function",
+      "name": "analyzeCommand",
+      "line": 44,
+      "file": "src/cli/index.js"
+    },
+    {
+      "type": "function",
+      "name": "serveCommand",
+      "line": 117,
+      "file": "src/cli/index.js"
+    },
+    {
+      "type": "function",
+      "name": "chalk",
+      "line": 15,
+      "file": "src/cli/index.js"
+    },
+    {
+      "type": "function",
+      "name": "generateProjectInsights",
+      "line": 7,
+      "file": "src/engine/analyzer.js"
+    },
+    {
+      "type": "function",
+      "name": "generateArchitectureDiagram",
+      "line": 93,
+      "file": "src/engine/analyzer.js"
+    },
+    {
+      "type": "function",
+      "name": "generateFullDocs",
+      "line": 134,
+      "file": "src/engine/analyzer.js"
+    },
+    {
+      "type": "function",
+      "name": "buildFileTree",
+      "line": 210,
+      "file": "src/engine/analyzer.js"
+    },
+    {
+      "type": "function",
+      "name": "buildFileTreeInner",
+      "line": 245,
+      "file": "src/engine/analyzer.js"
+    },
+    {
+      "type": "function",
+      "name": "generateWebData",
+      "line": 273,
+      "file": "src/engine/analyzer.js"
+    },
+    {
+      "type": "function",
+      "name": "getFileLang",
+      "line": 61,
+      "file": "src/engine/scanner.js"
+    },
+    {
+      "type": "function",
+      "name": "shouldScanDir",
+      "line": 65,
+      "file": "src/engine/scanner.js"
+    },
+    {
+      "type": "function",
+      "name": "shouldScanFile",
+      "line": 69,
+      "file": "src/engine/scanner.js"
+    },
+    {
+      "type": "function",
+      "name": "extractDeclarations",
+      "line": 77,
+      "file": "src/engine/scanner.js"
+    },
+    {
+      "type": "function",
+      "name": "extractComments",
+      "line": 128,
+      "file": "src/engine/scanner.js"
+    },
+    {
+      "type": "function",
+      "name": "scanDirectory",
+      "line": 181,
+      "file": "src/engine/scanner.js"
+    },
+    {
+      "type": "function",
+      "name": "scanProject",
+      "line": 281,
+      "file": "src/engine/scanner.js"
+    },
+    {
+      "type": "class",
+      "name": "python_def",
+      "line": 88,
+      "file": "src/engine/scanner.js"
+    }
+  ],
+  "dependencies": {
+    "npm": [
+      {
+        "name": "@octokit/rest",
+        "version": "22.0.1"
+      },
+      {
+        "name": "express",
+        "version": "4.18.0"
+      },
+      {
+        "name": "chalk",
+        "version": "4.1.2"
+      }
+    ],
+    "python": []
+  },
+  "fileTree": "codelens/\n├── 📁 .codelens/\n│   ├── 📝 architecture.mermaid (23 lines)\n│   ├── 📝 insights.json (202 lines)\n│   └── 📝 README.generated.md (145 lines)\n├── 📁 .github/\n│   └── 📝 FUNDING.yml (4 lines)\n├── 📁 src/\n│   ├── 📁 cli/\n│   │   └── 📝 index.js (170 lines)\n│   ├── 📁 engine/\n│   │   ├── 📝 analyzer.js (301 lines)\n│   │   └── 📝 scanner.js (302 lines)\n│   └── 📁 web/\n│       ├── 📁 public/\n│       │   ├── 📁 data/\n│       │   │   └── 📝 scan-result.json (202 lines)\n│       │   ├── 📝 app.js (304 lines)\n│       │   ├── 📝 index.html (189 lines)\n│       │   └── 📝 style.css (715 lines)\n│       └── 📝 server.js (57 lines)\n├── 📝 artifact_20260727.md (82 lines, Markdown)\n├── 📃 LICENSE (22 lines)\n├── 📃 package.json (41 lines, JSON)\n└── 📝 README.md (191 lines, Markdown)\n"
+}
