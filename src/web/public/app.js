@@ -3,16 +3,30 @@
  * Interactive dashboard for codebase intelligence.
  */
 
-const DATA = window.__CODELENS_DATA__ || {};
+let DATA = window.__CODELENS_DATA__ || {};
 const COLORS = ['lang-color-0','lang-color-1','lang-color-2','lang-color-3','lang-color-4','lang-color-5','lang-color-6','lang-color-7'];
 
 function $(id) { return document.getElementById(id); }
 
 // ====== Init ======
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  // Fallback 1: fetch from API if injection failed
+  if (!DATA.projectName) {
+    try {
+      const res = await fetch('/api/scan');
+      if (res.ok) DATA = await res.json();
+    } catch (e) { /* static hosting, no API */ }
+  }
+  // Fallback 2: static demo data file (e.g. GitHub Pages)
+  if (!DATA.projectName) {
+    try {
+      const res = await fetch('data/scan-result.json');
+      if (res.ok) DATA = await res.json();
+    } catch (e) { /* no data file */ }
+  }
   if (!DATA.projectName) {
     console.error('No scan data found. Run `codelens serve` first.');
-    $('projectTitle').textContent = 'No data loaded';
+    $('projectTitle').textContent = 'No data loaded — run: codelens serve <path>';
     return;
   }
   renderAll();
@@ -95,7 +109,13 @@ function renderLangBars() {
 function renderMermaid() {
   if (!DATA.architectureDiagram) return;
 
+  if (typeof mermaid === 'undefined') {
+    $('archMermaid').innerHTML = '<pre style="color:var(--text2);font-size:12px;white-space:pre-wrap;">' + DATA.architectureDiagram + '</pre>';
+    return;
+  }
+
   mermaid.initialize({
+    startOnLoad: false,
     theme: 'dark',
     themeVariables: {
       fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
@@ -115,13 +135,16 @@ function renderMermaid() {
     }
   });
 
-  try {
-    mermaid.render('archMermaid', DATA.architectureDiagram, (svg) => {
+  // mermaid v10+: render() returns a Promise<{svg}>
+  mermaid.render('archSvg', DATA.architectureDiagram)
+    .then(({ svg }) => {
       $('archMermaid').innerHTML = svg;
+      const el2 = $('archMermaid2');
+      if (el2) el2.innerHTML = svg;
+    })
+    .catch(() => {
+      $('archMermaid').innerHTML = '<pre style="color:var(--text2);font-size:12px;white-space:pre-wrap;">' + DATA.architectureDiagram + '</pre>';
     });
-  } catch(e) {
-    $('archMermaid').innerHTML = '<p style="color:var(--text2);font-size:13px;">📊 Architecture diagram generated. Install mermaid for visual rendering.</p>';
-  }
 }
 
 // ====== Language Detailed ======
